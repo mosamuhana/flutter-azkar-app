@@ -1,0 +1,12 @@
+TODO:
+// fontSize + and - (persistent)
+// tab counter
+// persistent favorites 
+
+
+...................................
+Install APK:
+
+adb devices -l
+
+adb -s RR8NB0A8QLL install app-release.apk

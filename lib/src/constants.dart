@@ -1,0 +1,3 @@
+const FONTSIZE_DEFAULT = 20.0;
+const FONTSIZE_MIN = 8.0;
+const FONTSIZE_MAX = 100.0;
