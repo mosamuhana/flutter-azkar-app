@@ -2,6 +2,10 @@
 
 Refreshing my flutter experiences.
 
+![Home Page](/screenshots/azkar_home.jpg)
+![Category Page](/screenshots/azkar_category.jpg)
+![Favorites Page](/screenshots/azkar_favorites.jpg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
