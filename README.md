@@ -1,6 +1,6 @@
-# app
+# Azkar flutter App
 
-A new Flutter project.
+Refreshing my flutter experiences.
 
 ## Getting Started
 
