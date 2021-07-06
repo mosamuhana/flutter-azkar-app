@@ -1,2 +1,2 @@
 export 'widgets/zeker-card.widget.dart';
-export 'widgets/text-size-buttons.widget.dart';
+export 'widgets/text-toolbar.widget.dart';

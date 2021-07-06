@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'services/locale.model.dart';
 
 import 'pages.dart';
-import 'styles/button.dart';
+import 'styles/theme.dart';
+import 'services/dark-mode.model.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //print('******************* API_KEY: ${dotenv.env['API_KEY']}');
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Azkar',
-        home: HomePage(),
-        //theme: ThemeData(primarySwatch: Colors.blue),
-        theme: ThemeData.from(colorScheme: ColorScheme.light()).copyWith(
-          primaryColor: Colors.green,
-          brightness: Brightness.light,
-          textButtonTheme: TextButtonThemeData(style: textButtonStyle),
-          elevatedButtonTheme:
-              ElevatedButtonThemeData(style: elevatedButtonStyle),
-          outlinedButtonTheme:
-              OutlinedButtonThemeData(style: outlinedButtonStyle),
-        ),
-      ),
+    return Consumer<DarkModeModel>(
+      builder: (context, darkModeModel, _) {
+        return Consumer<LocaleModel>(
+          builder: (context, localeModel, _) {
+            return MaterialApp(
+              locale: localeModel.value,
+              debugShowCheckedModeBanner: false,
+              title: 'Azkar',
+              home: HomePage(),
+              theme: getTheme(darkModeModel.value),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+            );
+          },
+        );
+      },
     );
   }
 }

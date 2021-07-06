@@ -28,7 +28,7 @@ class DataService {
         .map((obj) => Category(id: obj['id'], name: obj['name']))
         .toList();
 
-    final favs = PreferenceService.getFavorites();
+    final favs = PreferenceService.favorites;
 
     _list = azkar.map((data) {
       final id = data['id'] as int;
@@ -61,9 +61,8 @@ class DataService {
     final zeker = _list.firstWhere((x) => x.id == id);
     if (zeker.favorited == favorited) return false;
     zeker.favorited = favorited;
-    await PreferenceService.setFavorites(
-      _list.where((x) => x.favorited).map((x) => x.id).toList(),
-    );
+    PreferenceService.favorites =
+        _list.where((x) => x.favorited).map((x) => x.id).toList();
     return true;
   }
 }

@@ -3,36 +3,39 @@ import 'package:provider/provider.dart';
 
 import '../widgets.dart';
 import '../services.dart';
+import '../models.dart';
 import '../services/countdown.model.dart';
 
-class CategoryPage extends StatefulWidget {
-  final int category;
+class ZekrListPage extends StatefulWidget {
+  final String title;
+  final List<Zeker> items;
+  final bool showFav;
 
-  CategoryPage({
+  ZekrListPage({
     Key? key,
-    required this.category,
+    required this.title,
+    required this.items,
+    this.showFav = true,
   }) : super(key: key);
 
   @override
-  _CategoryPageState createState() => _CategoryPageState();
+  _ZekrListPageState createState() => _ZekrListPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _ZekrListPageState extends State<ZekrListPage> {
   @override
   Widget build(BuildContext context) {
-    final category =
-        DataService.categories.firstWhere((x) => x.id == widget.category);
     return WillPopScope(
       onWillPop: () async => true,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            centerTitle: true,
-            title: Text(category.name),
+            //centerTitle: true,
+            title: Text(this.widget.title),
             actions: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextSizeButtons(),
+                child: TextToolbar(),
               ),
             ],
           ),
@@ -46,21 +49,16 @@ class _CategoryPageState extends State<CategoryPage> {
 
   Widget _buildList(BuildContext context) {
     final countdown = Provider.of<CountdownModel>(context);
-
-    final list = DataService.getCategory(this.widget.category);
+    final items = widget.items;
     return ListView.builder(
       padding: const EdgeInsets.all(18),
-      itemCount: list.length,
+      itemCount: items.length,
       itemBuilder: (_, int index) {
-        final z = list[index];
+        final z = items[index];
         return ZekerCard(
           id: z.id,
           order: index + 1,
-          onFavPressed: () async {
-            if (await DataService.favorite(z.id, !z.favorited)) {
-              setState(() {});
-            }
-          },
+          onFavPressed: widget.showFav ? () => onFavPressed(z) : null,
           onCountDownPressed: () async {
             await countdown.decrement(z);
             setState(() {});
@@ -68,5 +66,11 @@ class _CategoryPageState extends State<CategoryPage> {
         );
       },
     );
+  }
+
+  Future<void> onFavPressed(Zeker z) async {
+    if (await DataService.favorite(z.id, !z.favorited)) {
+      setState(() {});
+    }
   }
 }

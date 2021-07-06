@@ -3,33 +3,32 @@ import 'package:flutter/material.dart';
 import 'preference.service.dart';
 import '../constants.dart';
 
-class FontSizeModel extends ChangeNotifier {
-  double _value = FONTSIZE_DEFAULT;
+class FontSizeModel extends ValueNotifier<double> {
+  FontSizeModel() : super(PreferenceService.fontSize);
 
-  FontSizeModel() : super() {
-    _value = PreferenceService.getFontSize();
-  }
+  @override
+  double get value => super.value;
 
-  double get value => _value;
+  @override
+  set value(double value) => super.value = value;
 
   void increment() {
-    var n = _value + 1;
+    var n = value + 1;
     if (n < FONTSIZE_MAX) {
-      _value = n;
-      _notifyListeners();
+      value = n;
+      _save();
     }
   }
 
   void decrement() {
-    var n = _value - 1;
+    var n = value - 1;
     if (n > FONTSIZE_MIN) {
-      _value = n;
-      _notifyListeners();
+      value = n;
+      _save();
     }
   }
 
-  void _notifyListeners() {
-    PreferenceService.setFontSize(_value);
-    notifyListeners();
+  void _save() {
+    PreferenceService.fontSize = value;
   }
 }

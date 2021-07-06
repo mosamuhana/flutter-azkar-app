@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../services.dart';
 import '../nav.dart';
@@ -7,27 +8,27 @@ import '../models.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('أذكار'),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.favorite),
-                splashRadius: 20,
-                onPressed: () => Nav.showFav(context),
-              ),
-              IconButton(
-                icon: Icon(Icons.settings),
-                splashRadius: 20,
-                onPressed: () {},
-              ),
-            ],
-          ),
-          body: _buildList(context),
+    final t = AppLocalizations.of(context)!;
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(t.azkar),
+          actions: [
+            IconButton(
+              tooltip: t.favorites,
+              icon: Icon(Icons.favorite),
+              splashRadius: 20,
+              onPressed: () => Nav.showFav(context),
+            ),
+            IconButton(
+              tooltip: t.settings,
+              icon: Icon(Icons.settings),
+              splashRadius: 20,
+              onPressed: () => Nav.showSettings(context),
+            ),
+          ],
         ),
+        body: _buildList(context),
       ),
     );
   }

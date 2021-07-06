@@ -13,6 +13,10 @@ dependencies:
   shared_preferences: ^2.0.6
   flutter_dotenv: ^5.0.0
   provider: ^5.0.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  settings_ui: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +28,9 @@ flutter:
   assets:
     - assets/data_min.json
     - assets/.env
+    - assets/images/settings.png
+
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

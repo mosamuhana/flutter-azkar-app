@@ -53,7 +53,7 @@ class ZekerCardState extends State<ZekerCard> {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
-      child: Consumer<FontSizeModel>(builder: (_, fontSize, __) {
+      child: Consumer<FontSizeModel>(builder: (_, fontSizeModel, __) {
         return Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,20 +63,20 @@ class ZekerCardState extends State<ZekerCard> {
                 model.header!,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: fontSize.value,
+                  fontSize: fontSizeModel.value,
                 ),
                 textAlign: TextAlign.right,
               ),
             Text(
               model.content,
-              style: TextStyle(fontSize: fontSize.value),
+              style: TextStyle(fontSize: fontSizeModel.value),
             ),
             SizedBox(height: 15),
             if (model.comment != null)
               Text(
                 model.comment!,
                 style: TextStyle(
-                  fontSize: fontSize.value - 4,
+                  fontSize: fontSizeModel.value - 4,
                   color: Colors.indigo,
                 ),
               ),

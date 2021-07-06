@@ -4,20 +4,15 @@ import 'preference.service.dart';
 import '../models.dart';
 
 class CountdownModel extends ChangeNotifier {
-  Map<int, int> _data = Map<int, int>();
+  Map<int, int> _data = PreferenceService.countdown;
 
-  CountdownModel() : super() {
-    _data = PreferenceService.getCountdown();
-  }
-
-  Future<int> decrement(Zeker z) async {
+  Future<void> decrement(Zeker z) async {
     int n = get(z);
     if (n > 0) {
       n--;
       _data[z.id] = n;
       await _notify();
     }
-    return n;
   }
 
   int get(Zeker z) {
@@ -30,7 +25,7 @@ class CountdownModel extends ChangeNotifier {
   }
 
   Future<void> _notify() async {
-    await PreferenceService.setCountdown(_data);
+    PreferenceService.countdown = _data;
     notifyListeners();
   }
 }

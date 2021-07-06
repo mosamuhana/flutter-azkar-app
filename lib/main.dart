@@ -8,6 +8,8 @@ import 'src/styles/theme.dart';
 import 'src/services/countdown.model.dart';
 import 'src/services/font-size.model.dart';
 import 'src/services/busy.model.dart';
+import 'src/services/locale.model.dart';
+import 'src/services/dark-mode.model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,20 +18,16 @@ Future<void> main() async {
   await PreferenceService.init();
   await DataService.init();
 
-  statusBarStyle(brightness: Brightness.dark);
+  statusBarStyle(PreferenceService.darkMode);
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => FontSizeModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => CountdownModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => BusyModel(),
-        ),
+        ChangeNotifierProvider(create: (_) => FontSizeModel()),
+        ChangeNotifierProvider(create: (_) => CountdownModel()),
+        ChangeNotifierProvider(create: (_) => BusyModel()),
+        ChangeNotifierProvider(create: (_) => LocaleModel()),
+        ChangeNotifierProvider(create: (_) => DarkModeModel()),
       ],
       child: App(),
     ),

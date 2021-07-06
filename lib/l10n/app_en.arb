@@ -1,0 +1,13 @@
+{
+  "azkar": "Azkar",
+  "favorites": "Favorites",
+  "settings": "Settings",
+  "common": "Common",
+  "language": "Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "darkMode": "Dark Mode",
+  "resetCounter": "Reset Counter",
+  "incrementFontSize": "Increment Font Size",
+  "decrementFontSize": "Decrement Font Size"
+}
