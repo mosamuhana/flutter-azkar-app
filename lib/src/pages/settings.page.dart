@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../services/locale.model.dart';
 import '../nav.dart';
-import '../services/dark-mode.model.dart';
+import '../services/theme.model.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    darkMode = context.read<DarkModeModel>().value;
+    darkMode = context.read<ThemeModel>().darkMode;
   }
 
   @override
@@ -34,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget buildSettingsList(AppLocalizations t) {
     final localeName = context.read<LocaleModel>().name;
     var langName = localeName == 'ar' ? t.arabic : t.english;
-    final darkModeModel = context.watch<DarkModeModel>();
+    final themeModel = context.read<ThemeModel>();
 
     return SettingsList(
       sections: [
@@ -53,7 +52,8 @@ class _SettingsPageState extends State<SettingsPage> {
               leading: Icon(Icons.dark_mode),
               switchValue: darkMode,
               onToggle: (value) {
-                darkModeModel.value = value;
+                //darkModeModel.value = value;
+                themeModel.darkMode = value;
                 darkMode = value;
                 setState(() {});
               },

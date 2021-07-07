@@ -43,12 +43,18 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, Category category) {
-    return ListTile(
-      title: Text(
-        category.name,
-        style: TextStyle(fontSize: 18),
+    return Card(
+      elevation: 0,
+      //color: AppColors.primaryColor,
+      color: Theme.of(context).primaryColor.withAlpha(150),
+      child: ListTile(
+        title: Text(
+          category.name,
+          style: TextStyle(fontSize: 18),
+        ),
+        onTap: () => Nav.showCategory(context, category.id),
+        //tileColor: Colors.blueGrey,
       ),
-      onTap: () => Nav.showCategory(context, category.id),
     );
   }
 }

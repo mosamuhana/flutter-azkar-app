@@ -5,6 +5,7 @@ import '../services.dart';
 import '../models.dart';
 import '../services/font-size.model.dart';
 import '../services/countdown.model.dart';
+import '../services/theme.model.dart';
 
 const HEADER_HEIGHT = 40.0;
 
@@ -32,6 +33,9 @@ class ZekerCardState extends State<ZekerCard> {
 
   ZekerCardState({required this.model}) : super();
 
+  bool get darkMode => context.read<ThemeModel>().darkMode;
+  Color get textColor => darkMode ? Colors.white : Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -42,6 +46,7 @@ class ZekerCardState extends State<ZekerCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _header,
+            Divider(thickness: .3, height: 3, color: Colors.grey),
             _content,
           ],
         ),
@@ -89,15 +94,16 @@ class ZekerCardState extends State<ZekerCard> {
   Widget get _header {
     return Container(
       height: HEADER_HEIGHT,
-      //color: Colors.blueAccent,
-      color: Theme.of(context).primaryColor.withAlpha(150),
       child: Row(
         children: [
           Container(
             width: HEADER_HEIGHT,
             height: HEADER_HEIGHT,
             alignment: Alignment.center,
-            child: Text('${this.widget.order}', style: _indexTextStyle),
+            child: Text(
+              '${this.widget.order}',
+              style: TextStyle(fontSize: 15, color: textColor),
+            ),
           ),
           Expanded(child: _counter),
           _favIcon,
@@ -114,7 +120,7 @@ class ZekerCardState extends State<ZekerCard> {
         onPressed: this.widget.onFavPressed,
         icon: Icon(
           model.favorited ? Icons.favorite : Icons.favorite_border,
-          color: model.favorited ? Colors.red : Colors.white,
+          color: model.favorited ? Colors.red : textColor,
           size: HEADER_HEIGHT / 2,
         ),
         splashRadius: 20,
@@ -130,11 +136,6 @@ class ZekerCardState extends State<ZekerCard> {
   }
 
   Widget get _counter {
-    //final countdown = DataService.getCountdown(model);
-    //final _cd = Provider.of<CountdownModel>(context);
-    //final countdown = _cd.get(model);
-    //final isActive = countdown > 0;
-
     return Container(
       height: HEADER_HEIGHT,
       width: 200,
@@ -144,20 +145,13 @@ class ZekerCardState extends State<ZekerCard> {
           final isActive = countdown > 0;
           return TextButton(
             onPressed: isActive ? this.widget.onCountDownPressed : null,
-            child:
-                Text('$countdown / ${model.count}', style: _counterTextStyle),
+            child: Text(
+              '$countdown / ${model.count}',
+              style: TextStyle(fontSize: 20, color: textColor),
+            ),
           );
         },
       ),
-      /*
-      child: TextButton(
-        onPressed: isActive ? this.widget.onCountDownPressed : null,
-        child: Text('$countdown / ${model.count}', style: _counterTextStyle),
-      ),
-      */
     );
   }
-
-  final _counterTextStyle = TextStyle(fontSize: 20, color: Colors.white);
-  final _indexTextStyle = TextStyle(fontSize: 15, color: Colors.white);
 }

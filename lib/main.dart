@@ -9,11 +9,10 @@ import 'src/services/countdown.model.dart';
 import 'src/services/font-size.model.dart';
 import 'src/services/busy.model.dart';
 import 'src/services/locale.model.dart';
-import 'src/services/dark-mode.model.dart';
+import 'src/services/theme.model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await dotenv.load(fileName: "assets/.env");
 
   await PreferenceService.init();
   await DataService.init();
@@ -27,7 +26,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => CountdownModel()),
         ChangeNotifierProvider(create: (_) => BusyModel()),
         ChangeNotifierProvider(create: (_) => LocaleModel()),
-        ChangeNotifierProvider(create: (_) => DarkModeModel()),
+        ChangeNotifierProvider(create: (_) => ThemeModel()),
       ],
       child: App(),
     ),
