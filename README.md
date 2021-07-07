@@ -2,9 +2,18 @@
 
 Refreshing my flutter experiences.
 
-![Home Page](/screenshots/azkar_home.jpg)
-![Category Page](/screenshots/azkar_category.jpg)
-![Favorites Page](/screenshots/azkar_favorites.jpg)
+## Light Mode
+|  |  |
+| --- | --- |
+| ![Light:Home Page](/screenshots/light/home.jpg) | ![Light:Category Page](/screenshots/light/category.jpg) |
+| ![Light:Favorites Page](/screenshots/light/favorites.jpg) | ![Light:Settings Page](/screenshots/light/settings.jpg) |
+
+## Dark Mode
+|  |  |
+| --- | --- |
+| ![Dark:Home Page](/screenshots/dark/home.jpg) | ![Dark:Category Page](/screenshots/dark/category.jpg) |
+| ![Dark:Favorites Page](/screenshots/dark/favorites.jpg) | ![Dark:Settings Page](/screenshots/dark/settings.jpg) |
+
 
 ## Getting Started
 

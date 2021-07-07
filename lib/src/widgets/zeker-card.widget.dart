@@ -80,7 +80,7 @@ class ZekerCardState extends State<ZekerCard> {
                 model.comment!,
                 style: TextStyle(
                   fontSize: fontSizeModel.value - 4,
-                  color: Colors.indigo,
+                  color: isDark ? Colors.yellow : Colors.indigo,
                 ),
               ),
           ],
