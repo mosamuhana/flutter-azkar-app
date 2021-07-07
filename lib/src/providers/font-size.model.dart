@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'preference.service.dart';
+import '../services.dart';
 import '../constants.dart';
 
 class FontSizeModel extends ValueNotifier<double> {

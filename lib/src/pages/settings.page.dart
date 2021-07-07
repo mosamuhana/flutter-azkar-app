@@ -3,9 +3,9 @@ import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../services/locale.model.dart';
 import '../nav.dart';
-import '../services/theme.model.dart';
+import '../providers.dart';
+import '../extensions.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    darkMode = context.read<ThemeModel>().darkMode;
+    darkMode = context.read<ThemeModel>().isDark;
   }
 
   @override
@@ -31,9 +31,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget buildSettingsList(AppLocalizations t) {
-    final localeName = context.read<LocaleModel>().name;
-    var langName = localeName == 'ar' ? t.arabic : t.english;
-    final themeModel = context.read<ThemeModel>();
+    final langName =
+        context.read<LocaleModel>().name == 'ar' ? t.arabic : t.english;
+    final themeName = context.read<ThemeModel>().themeMode.getLocalizedName(t);
 
     return SettingsList(
       sections: [
@@ -42,21 +42,15 @@ class _SettingsPageState extends State<SettingsPage> {
           tiles: [
             SettingsTile(
               title: t.language,
-              //subtitle: 'English',
               subtitle: langName,
               leading: Icon(Icons.language),
               onPressed: (context) => Nav.showLanguage(context),
             ),
-            SettingsTile.switchTile(
-              title: t.darkMode,
-              leading: Icon(Icons.dark_mode),
-              switchValue: darkMode,
-              onToggle: (value) {
-                //darkModeModel.value = value;
-                themeModel.darkMode = value;
-                darkMode = value;
-                setState(() {});
-              },
+            SettingsTile(
+              title: t.theme,
+              subtitle: themeName,
+              leading: Icon(Icons.language),
+              onPressed: (context) => Nav.showTheme(context),
             ),
           ],
         ),

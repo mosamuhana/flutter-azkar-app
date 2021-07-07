@@ -49,13 +49,12 @@ class DataService {
   static List<Category> get categories => _categories;
   static List<Zeker> get list => _list;
 
-  static Zeker getZeker(int id) => _list.firstWhere((x) => x.id == id);
+  static Zeker getItem(int id) => _list.firstWhere((x) => x.id == id);
 
   static List<Zeker> getCategory(int categoryId) =>
       _list.where((x) => x.category == categoryId).toList();
 
-  static List<Zeker> getFavoriteList() =>
-      _list.where((x) => x.favorited).toList();
+  static List<Zeker> get favorites => _list.where((x) => x.favorited).toList();
 
   static Future<bool> favorite(int id, bool favorited) async {
     final zeker = _list.firstWhere((x) => x.id == id);

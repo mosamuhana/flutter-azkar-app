@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../services.dart';
 import '../models.dart';
-import '../services/font-size.model.dart';
-import '../services/countdown.model.dart';
-import '../services/theme.model.dart';
+import '../providers.dart';
 
 const HEADER_HEIGHT = 40.0;
 
@@ -25,7 +23,7 @@ class ZekerCard extends StatefulWidget {
 
   @override
   ZekerCardState createState() =>
-      ZekerCardState(model: DataService.getZeker(id));
+      ZekerCardState(model: DataService.getItem(id));
 }
 
 class ZekerCardState extends State<ZekerCard> {
@@ -33,8 +31,8 @@ class ZekerCardState extends State<ZekerCard> {
 
   ZekerCardState({required this.model}) : super();
 
-  bool get darkMode => context.read<ThemeModel>().darkMode;
-  Color get textColor => darkMode ? Colors.white : Colors.black;
+  bool get isDark => context.read<ThemeModel>().isDark;
+  Color get color => isDark ? Colors.white : Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +100,7 @@ class ZekerCardState extends State<ZekerCard> {
             alignment: Alignment.center,
             child: Text(
               '${this.widget.order}',
-              style: TextStyle(fontSize: 15, color: textColor),
+              style: TextStyle(fontSize: 15, color: color),
             ),
           ),
           Expanded(child: _counter),
@@ -120,7 +118,7 @@ class ZekerCardState extends State<ZekerCard> {
         onPressed: this.widget.onFavPressed,
         icon: Icon(
           model.favorited ? Icons.favorite : Icons.favorite_border,
-          color: model.favorited ? Colors.red : textColor,
+          color: model.favorited ? Colors.red : color,
           size: HEADER_HEIGHT / 2,
         ),
         splashRadius: 20,
@@ -147,7 +145,7 @@ class ZekerCardState extends State<ZekerCard> {
             onPressed: isActive ? this.widget.onCountDownPressed : null,
             child: Text(
               '$countdown / ${model.count}',
-              style: TextStyle(fontSize: 20, color: textColor),
+              style: TextStyle(fontSize: 20, color: color),
             ),
           );
         },

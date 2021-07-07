@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
               tooltip: t.favorites,
               icon: Icon(Icons.favorite),
               splashRadius: 20,
-              onPressed: () => Nav.showFav(context),
+              onPressed: () => Nav.showFavorites(context),
             ),
             IconButton(
               tooltip: t.settings,

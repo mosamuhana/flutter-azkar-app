@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../services/font-size.model.dart';
-import '../services/countdown.model.dart';
+import '../providers.dart';
 
 class TextToolbar extends StatelessWidget {
   final double splashRadius = 20;
@@ -36,7 +35,7 @@ class TextToolbar extends StatelessWidget {
             );
           },
         ),
-        SizedBox(width: 5),
+        SizedBox(width: 20),
         Consumer<CountdownModel>(
           builder: (_, countdownModel, __) {
             return IconButton(

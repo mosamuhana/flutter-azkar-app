@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'preference.service.dart';
+import '../services.dart';
 
 class LocaleModel extends ValueNotifier<Locale> {
   LocaleModel() : super(Locale(PreferenceService.locale));

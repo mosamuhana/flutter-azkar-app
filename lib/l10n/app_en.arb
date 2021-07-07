@@ -9,5 +9,9 @@
   "darkMode": "Dark Mode",
   "resetCounter": "Reset Counter",
   "incrementFontSize": "Increment Font Size",
-  "decrementFontSize": "Decrement Font Size"
+  "decrementFontSize": "Decrement Font Size",
+  "theme": "theme",
+  "dark": "Dark",
+  "light": "Light",
+  "system": "System"
 }

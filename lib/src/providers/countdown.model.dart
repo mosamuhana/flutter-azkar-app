@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'preference.service.dart';
+import '../services.dart';
 import '../models.dart';
 
 class CountdownModel extends ChangeNotifier {

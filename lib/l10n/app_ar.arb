@@ -9,5 +9,9 @@
     "darkMode": "الوضع الليلي",
     "resetCounter": "إعادة ضيط العداد",
     "incrementFontSize": "زيادة حجم الخط",
-    "decrementFontSize": "إنقاص حجم الخط"
+    "decrementFontSize": "إنقاص حجم الخط",
+    "theme": "الثيم",
+    "dark": "غامق",
+    "light": "فاتح",
+    "system": "النظام"
 }

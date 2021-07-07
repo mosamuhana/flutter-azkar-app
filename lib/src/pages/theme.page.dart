@@ -5,31 +5,32 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../providers.dart';
 
-class LanguagePage extends StatefulWidget {
+class ThemePage extends StatefulWidget {
   @override
-  _LanguagePageState createState() => _LanguagePageState();
+  _ThemePageState createState() => _ThemePageState();
 }
 
-class _LanguagePageState extends State<LanguagePage> {
-  String localeName = 'ar';
+class _ThemePageState extends State<ThemePage> {
+  late ThemeMode themeMode;
 
   @override
   void initState() {
     super.initState();
-    this.localeName = context.read<LocaleModel>().name;
+    this.themeMode = context.read<ThemeModel>().themeMode;
   }
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(t.language)),
+      appBar: AppBar(title: Text(t.theme)),
       body: SettingsList(
         sections: [
           SettingsSection(
             tiles: [
-              _buildTile('en', t.english),
-              _buildTile('ar', t.arabic),
+              _buildTile(ThemeMode.dark, t.dark),
+              _buildTile(ThemeMode.light, t.light),
+              _buildTile(ThemeMode.system, t.system),
             ],
           ),
         ],
@@ -37,17 +38,17 @@ class _LanguagePageState extends State<LanguagePage> {
     );
   }
 
-  SettingsTile _buildTile(String code, String title) {
+  SettingsTile _buildTile(ThemeMode mode, String title) {
     return SettingsTile(
       title: title,
-      trailing: this.localeName == code ? _checkIcon : null,
-      onPressed: (_) => change(code),
+      trailing: this.themeMode == mode ? _checkIcon : null,
+      onPressed: (_) => change(mode),
     );
   }
 
-  void change(String localeName) {
-    this.localeName = localeName;
-    context.read<LocaleModel>().name = localeName;
+  void change(ThemeMode mode) {
+    this.themeMode = mode;
+    context.read<ThemeModel>().themeMode = mode;
     setState(() {});
   }
 

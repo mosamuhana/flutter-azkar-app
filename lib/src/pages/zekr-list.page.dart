@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../widgets.dart';
 import '../services.dart';
 import '../models.dart';
-import '../services/countdown.model.dart';
+import '../providers.dart';
 
 class ZekrListPage extends StatefulWidget {
   final String title;
@@ -30,8 +30,7 @@ class _ZekrListPageState extends State<ZekrListPage> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            //centerTitle: true,
-            title: Text(this.widget.title),
+            //title: Text(this.widget.title),
             actions: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -39,19 +38,28 @@ class _ZekrListPageState extends State<ZekrListPage> {
               ),
             ],
           ),
-          body: Container(
-            child: _buildList(context),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  widget.title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22),
+                ),
+              ),
+              Expanded(child: _buildList()),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildList(BuildContext context) {
-    final countdown = Provider.of<CountdownModel>(context);
+  Widget _buildList() {
     final items = widget.items;
     return ListView.builder(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
       itemCount: items.length,
       itemBuilder: (_, int index) {
         final z = items[index];
@@ -60,7 +68,7 @@ class _ZekrListPageState extends State<ZekrListPage> {
           order: index + 1,
           onFavPressed: widget.showFav ? () => onFavPressed(z) : null,
           onCountDownPressed: () async {
-            await countdown.decrement(z);
+            await context.read<CountdownModel>().decrement(z);
             setState(() {});
           },
         );

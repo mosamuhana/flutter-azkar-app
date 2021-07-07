@@ -6,24 +6,6 @@ import 'services.dart';
 import 'models.dart';
 
 class Nav {
-  static Future<void> _showZekrListPage(
-    BuildContext context, {
-    required String title,
-    required List<Zeker> items,
-    bool showFav = true,
-  }) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ZekrListPage(
-          title: title,
-          items: items,
-          showFav: showFav,
-        ),
-      ),
-    );
-  }
-
   static Future<void> showCategory(BuildContext context, int category) async {
     final c = DataService.categories.firstWhere((x) => x.id == category);
     final items = DataService.getCategory(c.id);
@@ -36,8 +18,8 @@ class Nav {
     );
   }
 
-  static Future<void> showFav(BuildContext context) async {
-    final items = DataService.getFavoriteList();
+  static Future<void> showFavorites(BuildContext context) async {
+    final items = DataService.favorites;
     await _showZekrListPage(
       context,
       title: AppLocalizations.of(context)!.favorites,
@@ -57,6 +39,31 @@ class Nav {
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => LanguagePage()),
+    );
+  }
+
+  static Future<void> showTheme(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => ThemePage()),
+    );
+  }
+
+  static Future<void> _showZekrListPage(
+    BuildContext context, {
+    required String title,
+    required List<Zeker> items,
+    bool showFav = true,
+  }) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ZekrListPage(
+          title: title,
+          items: items,
+          showFav: showFav,
+        ),
+      ),
     );
   }
 }
