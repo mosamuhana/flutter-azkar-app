@@ -2,6 +2,9 @@
 
 Refreshing my flutter experiences.
 
+## Download
+[Download Apk](/azkar.apk)
+
 ## Light Mode
 |  |  |
 | --- | --- |
