@@ -5,6 +5,7 @@ Refreshing my flutter experiences.
 ## Download
 [Download Apk](/azkar.apk)
 
+<a id="raw-url" href="https://raw.githubusercontent.com/mosamuhana/flutter-azkar-app/main/azkar.apk">Download Apk</a>
 
 ## Light Mode
 |  |  |
