@@ -5,6 +5,9 @@ Refreshing my flutter experiences.
 ## Download
 [Download Apk](/azkar.apk)
 
+<a href="/azkar.apk" download="azkar.apk">Download the apk file</a>
+
+
 ## Light Mode
 |  |  |
 | --- | --- |
