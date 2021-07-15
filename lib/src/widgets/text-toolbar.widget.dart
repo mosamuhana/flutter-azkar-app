@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../providers.dart';
+import '../boxes.dart';
 
 class TextToolbar extends StatelessWidget {
+  final FontSizeSetting fontSizeSetting = FontSizeSetting();
+
   final double splashRadius = 20;
-  const TextToolbar({Key? key}) : super(key: key);
+  TextToolbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,34 +15,37 @@ class TextToolbar extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Consumer<FontSizeModel>(
-          builder: (_, fontSizeModel, __) {
+        ValueListenableBuilder(
+          valueListenable: fontSizeSetting.listen(),
+          builder: (___, __, _) {
             return IconButton(
               tooltip: t.incrementFontSize,
               icon: Icon(Icons.add),
-              onPressed: () => fontSizeModel.increment(),
+              onPressed: fontSizeSetting.incrementCallback,
               splashRadius: splashRadius,
             );
           },
         ),
         SizedBox(width: 5),
-        Consumer<FontSizeModel>(
-          builder: (_, dontSizeModel, __) {
+        ValueListenableBuilder(
+          valueListenable: fontSizeSetting.listen(),
+          builder: (___, __, _) {
             return IconButton(
-              tooltip: t.decrementFontSize,
+              tooltip: t.incrementFontSize,
               icon: Icon(Icons.remove),
-              onPressed: () => dontSizeModel.decrement(),
+              onPressed: fontSizeSetting.decrementCallback,
               splashRadius: splashRadius,
             );
           },
         ),
         SizedBox(width: 20),
-        Consumer<CountdownModel>(
-          builder: (_, countdownModel, __) {
+        ValueListenableBuilder(
+          valueListenable: Countdown.listenChanges(),
+          builder: (___, __, _) {
             return IconButton(
               tooltip: t.resetCounter,
               icon: Icon(Icons.restore),
-              onPressed: () => countdownModel.reset(),
+              onPressed: Countdown.resetCallback,
               splashRadius: splashRadius,
             );
           },

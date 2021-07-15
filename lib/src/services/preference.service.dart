@@ -9,7 +9,6 @@ const FAV_KEY = 'FAV';
 const FONT_SIZE_KEY = 'FONT_SIZE';
 const COUNTDOWN_KEY = 'COUNTDOWN';
 const LOCALE_KEY = 'LOCALE';
-const DARK_MODE_KEY = 'DARK_MODE';
 const THEME_MODE_KEY = 'THEME_MODE';
 
 class PreferenceService {
@@ -67,7 +66,7 @@ class PreferenceService {
   }
 
   static ThemeMode get themeMode {
-    var mode = _instance.getString(DARK_MODE_KEY);
+    var mode = _instance.getString(THEME_MODE_KEY);
     if (mode != null) {
       //final tm = mode.toThemeMode();
       final tm = ThemeModeExtensions.parse(mode);
@@ -79,6 +78,6 @@ class PreferenceService {
   }
 
   static set themeMode(ThemeMode value) {
-    _instance.setString(DARK_MODE_KEY, value.asString());
+    _instance.setString(THEME_MODE_KEY, value.asString());
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets.dart';
-import '../services.dart';
 import '../models.dart';
-import '../providers.dart';
+import '../boxes.dart';
 
 class ZekrListPage extends StatefulWidget {
   final String title;
@@ -68,7 +66,7 @@ class _ZekrListPageState extends State<ZekrListPage> {
           order: index + 1,
           onFavPressed: widget.showFav ? () => onFavPressed(z) : null,
           onCountDownPressed: () async {
-            await context.read<CountdownModel>().decrement(z);
+            Countdown.decrement(z);
             setState(() {});
           },
         );
@@ -76,9 +74,8 @@ class _ZekrListPageState extends State<ZekrListPage> {
     );
   }
 
-  Future<void> onFavPressed(Zeker z) async {
-    if (await DataService.favorite(z.id, !z.favorited)) {
-      setState(() {});
-    }
+  void onFavPressed(Zeker z) {
+    Favorites.toggle(z.id);
+    setState(() {});
   }
 }

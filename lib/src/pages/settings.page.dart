@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
 import '../nav.dart';
-import '../providers.dart';
 import '../extensions.dart';
+import '../boxes.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    darkMode = context.read<ThemeModel>().isDark;
+    darkMode = ThemeSetting.instance.isDark;
   }
 
   @override
@@ -32,8 +31,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget buildSettingsList(AppLocalizations t) {
     final langName =
-        context.read<LocaleModel>().name == 'ar' ? t.arabic : t.english;
-    final themeName = context.read<ThemeModel>().themeMode.getLocalizedName(t);
+        LocaleSetting.instance.value == 'ar' ? t.arabic : t.english;
+    final themeName = ThemeSetting.instance.themeMode.getLocalizedName(t);
 
     return SettingsList(
       sections: [

@@ -1,10 +1,10 @@
-import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../models.dart';
 import 'preference.service.dart';
+import '../boxes.dart';
 
 const CATEGORIES_KEY = 'categories';
 const LIST_KEY = 'list';
@@ -28,7 +28,8 @@ class DataService {
         .map((obj) => Category(id: obj['id'], name: obj['name']))
         .toList();
 
-    final favs = PreferenceService.favorites;
+    //final favs = PreferenceService.favorites;
+    final favs = Favorites.list;
 
     _list = azkar.map((data) {
       final id = data['id'] as int;
@@ -54,7 +55,10 @@ class DataService {
   static List<Zeker> getCategory(int categoryId) =>
       _list.where((x) => x.category == categoryId).toList();
 
-  static List<Zeker> get favorites => _list.where((x) => x.favorited).toList();
+  static List<Zeker> get favorites {
+    final ids = Favorites.list;
+    return _list.where((x) => ids.indexOf(x.id) != -1).toList();
+  }
 
   static Future<bool> favorite(int id, bool favorited) async {
     final zeker = _list.firstWhere((x) => x.id == id);

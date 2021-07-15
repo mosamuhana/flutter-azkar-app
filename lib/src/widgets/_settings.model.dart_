@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+@HiveType(typeId: 2)
+class Settings extends HiveObject {
+  Settings({
+    required this.themeMode,
+    required this.param2,
+  }) : super();
+
+  @HiveField(0, defaultValue: 0)
+  final int themeMode;
+
+  @HiveField(1)
+  final String param2;
+}
+
+class User {
+  String name;
+
+  User(this.name);
+
+  @override
+  String toString() => name; // Just for print()
+}
+
+class UserAdapter extends TypeAdapter<User> {
+  @override
+  final typeId = 0;
+
+  @override
+  User read(BinaryReader reader) {
+    return User(reader.read());
+  }
+
+  @override
+  void write(BinaryWriter writer, User obj) {
+    writer.write(obj.name);
+  }
+}
+
+@HiveType()
+class Person extends HiveObject {
+  @HiveField(0)
+  String name;
+
+  @HiveField(1)
+  HiveList? friends;
+
+  Person(this.name);
+
+  String toString() => name; // For print()
+}
+
+class PersonAdapter extends TypeAdapter<Person> {
+  @override
+  final typeId = 0;
+
+  @override
+  Person read(BinaryReader reader) {
+    return Person(reader.read())..friends = reader.read();
+  }
+
+  @override
+  void write(BinaryWriter writer, Person obj) {
+    writer.write(obj.name);
+    writer.write(obj.friends);
+  }
+}
